@@ -27,7 +27,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <icon value="Imagenes/img.png"/>
+              <icon value="Imagenes/Logo1.png"/>
               <text value=""/>
             </properties>
           </component>
@@ -90,7 +90,7 @@
               <grid row="3" column="6" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="28b46" class="javax.swing.JButton" binding="aceptarButton" default-binding="true">
+          <component id="28b46" class="javax.swing.JButton" binding="aceptarB">
             <constraints>
               <grid row="9" column="3" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="40"/>
@@ -104,7 +104,7 @@
               <text value="Aceptar"/>
             </properties>
           </component>
-          <component id="20be3" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
+          <component id="20be3" class="javax.swing.JButton" binding="eliminarB">
             <constraints>
               <grid row="9" column="6" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="40"/>
@@ -118,7 +118,7 @@
               <text value="Eliminar"/>
             </properties>
           </component>
-          <component id="284f" class="javax.swing.JTextField" binding="dfgTextField" default-binding="true">
+          <component id="284f" class="javax.swing.JTextField" binding="usuarioTF">
             <constraints>
               <grid row="4" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="35"/>
@@ -180,7 +180,7 @@
               <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <icon value="Imagenes/img_1.png"/>
+              <icon value="Imagenes/iconoUsuario.png"/>
               <text value=""/>
             </properties>
           </component>
@@ -194,7 +194,7 @@
               <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="f73f5" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+          <component id="f73f5" class="javax.swing.JPasswordField" binding="passwordTF">
             <constraints>
               <grid row="7" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="35"/>
