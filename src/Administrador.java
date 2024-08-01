@@ -5,16 +5,17 @@ import java.awt.event.ActionListener;
 public class Administrador {
     public JPanel mainPanel;
     private JButton cerrarCesionB;
-    private JButton gestionarP;
+    private JButton gestionarPro;
     private JButton gestionarU;
     private JButton revicionV;
 
     public Administrador() {
-        gestionarP.addActionListener(new ActionListener() {
+        gestionarPro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 JFrame frame = new JFrame("Cell Tech Hub");
-                frame.setContentPane(new GestionProductos().mainPanel);
+                frame.setContentPane(new Prueba().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setResizable(false);

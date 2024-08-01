@@ -6,7 +6,8 @@ public class Productos {
     private String descripcion;
     private int cantidad;
     private double precio;
-    private String foto;  // Suponiendo que la foto es una URL o una ruta a un archivo
+    private String foto;
+    public Productos() {}
 
     // Constructor
     public Productos(String nombre, String descripcion, int cantidad, double precio, String foto) {

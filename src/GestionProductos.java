@@ -1,7 +1,12 @@
+import com.mongodb.client.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import org.bson.Document;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class GestionProductos {
     public JPanel mainPanel;
@@ -19,16 +24,17 @@ public class GestionProductos {
     private JLabel id2Txt;
     private JLabel Id1Txt;
     private JLabel nombre1Txt;
+    public JLabel UltIdTxt;
+    private JLabel UltNameTxt;
+    public JLabel UltPrecioTxt;
+    private JLabel UltCantidadTxt;
+    private JLabel UltDescripTxt;
+    private JLabel UltFoto;
+
+    private NuevoProducto nuevoproducto;
 
     public GestionProductos() {
-        eliminarB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//
-
-
-            }
-        });
+        nuevoproducto =new NuevoProducto();
         cerrarCesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +75,36 @@ public class GestionProductos {
                 frame.setSize(1000, 630);
                 frame.setVisible(true);
                 ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+
+
             }
         });
+
+        Productos ultimoProducto = nuevoproducto.obtenerProducto();
+        if (ultimoProducto != null) {
+            UltNameTxt.setText(ultimoProducto.getNombre());
+            UltPrecioTxt.setText(String.valueOf(ultimoProducto.getPrecio()));
+            UltCantidadTxt.setText(String.valueOf(ultimoProducto.getCantidad()));
+            UltDescripTxt.setText(ultimoProducto.getDescripcion());
+
+            String fotoPath = ultimoProducto.getFoto();
+            if (fotoPath != null) {
+                try {
+                    BufferedImage img = ImageIO.read(new File(fotoPath));
+                    ImageIcon icon = new ImageIcon(img);
+                    UltFoto.setIcon(icon);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        }
+
+        nuevoproducto.cerrarConexion();
+
+
+
+
+
     }
+
 }
