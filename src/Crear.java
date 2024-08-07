@@ -1,5 +1,6 @@
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,10 +25,22 @@ public class Crear {
     private JButton regresarB;
     private JLabel imagenTf;
     private String imagenRuta;
-    private Productos producto1;
+    private Document documento; // Documento para actualizar
 
+    // Constructor para modo creación
     public Crear() {
+        initComponents();
+        setupCreateMode();
+    }
 
+    // Constructor para modo actualización
+    public Crear(Document documento) {
+        this.documento = documento;
+        initComponents();
+        setupUpdateMode();
+    }
+
+    private void initComponents() {
         ImagenB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,11 +60,12 @@ public class Crear {
                 }
             }
         });
+
         regresarB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Cell Tech Hub");
-                frame.setContentPane(new GestionProductos().mainPanel);
+                frame.setContentPane(new Tabla().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setResizable(false);
@@ -61,33 +75,39 @@ public class Crear {
                 ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
             }
         });
+
         aceptarB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = nombreTf.getText();
                 String descripcion = descripcionTf.getText();
-                int cantidad = (int) cantidadTf.getValue();
+                int cantidad = Integer.parseInt(cantidadTf.getValue().toString());
                 double precio = Double.parseDouble(precioTf.getText());
 
-                Productos producto1 = new Productos(nombre, descripcion, cantidad, precio, imagenRuta);
-
-                // Insertar el producto en MongoDB
+                // Crear o actualizar el producto
                 try (MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017")) {
                     MongoDatabase database = mongoClient.getDatabase("celltechhub");
                     MongoCollection<Document> collection = database.getCollection("Productos");
 
-                    Document documento = new Document("_id", producto1.getId())
-                            .append("nombre", producto1.getNombre())
-                            .append("descripcion", producto1.getDescripcion())
-                            .append("cantidad", producto1.getCantidad())
-                            .append("precio", producto1.getPrecio())
-                            .append("foto", producto1.getFoto());
+                    Document doc = new Document("nombre", nombre)
+                            .append("descripcion", descripcion)
+                            .append("cantidad", cantidad)
+                            .append("precio", precio)
+                            .append("foto", imagenRuta);
 
-                    collection.insertOne(documento);
-                    JOptionPane.showMessageDialog(null, "Producto insertado con éxito");
+                    if (documento == null) {
+                        // Modo creación
+                        doc.append("_id", new ObjectId()); // Generar un nuevo ID
+                        collection.insertOne(doc);
+                        JOptionPane.showMessageDialog(null, "Producto insertado con éxito");
+                    } else {
+                        // Modo actualización
+                        collection.updateOne(new Document("_id", documento.getObjectId("_id")), new Document("$set", doc));
+                        JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
+                    }
 
                     JFrame frame = new JFrame("Cell Tech Hub");
-                    frame.setContentPane(new GestionProductos().mainPanel);
+                    frame.setContentPane(new Tabla().mainPanel);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.pack();
                     frame.setResizable(false);
@@ -95,17 +115,36 @@ public class Crear {
                     frame.setSize(1000, 630);
                     frame.setVisible(true);
                     ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
-
-
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error al insertar el producto: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
-
-
             }
         });
+    }
 
+    private void setupCreateMode() {
+        // Configuración específica para el modo creación
+        idTf.setEnabled(false);
+        imagenRuta = "";
+    }
 
+    private void setupUpdateMode() {
+        // Configuración específica para el modo actualización
+        nombreTf.setText(documento.getString("nombre"));
+        descripcionTf.setText(documento.getString("descripcion"));
+        cantidadTf.setValue(documento.getInteger("cantidad"));
+        precioTf.setText(documento.getDouble("precio").toString());
+        imagenRuta = documento.getString("foto");
 
+        // Cargar la imagen si está disponible
+        if (imagenRuta != null && !imagenRuta.isEmpty()) {
+            try {
+                BufferedImage img = ImageIO.read(new File(imagenRuta));
+                ImageIcon icon = new ImageIcon(img.getScaledInstance(imagenTf.getWidth(), imagenTf.getHeight(), java.awt.Image.SCALE_SMOOTH));
+                imagenTf.setIcon(icon);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 }

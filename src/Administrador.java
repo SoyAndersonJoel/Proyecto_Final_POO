@@ -15,7 +15,7 @@ public class Administrador {
             public void actionPerformed(ActionEvent e) {
 
                 JFrame frame = new JFrame("Cell Tech Hub");
-                frame.setContentPane(new Prueba().mainPanel);
+                frame.setContentPane(new Tabla().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setResizable(false);
@@ -23,6 +23,23 @@ public class Administrador {
                 frame.setSize(1000, 630);
                 frame.setVisible(true);
                 ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+
+            }
+        });
+
+        gestionarU.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Cell Tech Hub");
+                frame.setContentPane(new GestionCajeros().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+
 
             }
         });

@@ -9,12 +9,12 @@ public class Main {
     public static void main(String[] args) {
 
         UsuarioAdmi administrador = new UsuarioAdmi();
-        String username = "Ander";
+        String username = "Anderson";
         String password = "123456";
         administrador.insertar(username, password);
 
         JFrame frame = new JFrame("Cell Tech Hub");
-        frame.setContentPane(new Prueba().mainPanel);
+        frame.setContentPane(new Login().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);

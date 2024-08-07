@@ -47,7 +47,7 @@ public class Login {
 
                         }else {
                             JFrame frame = new JFrame("Cell Tech Hub");
-                            frame.setContentPane(new GestionProductos().mainPanel);
+                            frame.setContentPane(new Login().mainPanel);
                             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             frame.pack();
                             frame.setResizable(false);
