@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tabla {
+public class GestionProductos {
     public JPanel mainPanel;
     private JTable table1;
     private JButton añadirButton;
@@ -23,6 +23,7 @@ public class Tabla {
     private JButton button6;
     private JButton cerrarCesionB;
     private JButton eliminarButton;
+    private JButton regresarB;
 
     private MongoClient mongoClient;
     private MongoCollection<Document> collection;
@@ -30,7 +31,7 @@ public class Tabla {
 
     private ObjectId selectedId; // Id del documento seleccionado
 
-    public Tabla() {
+    public GestionProductos() {
         // Conectar a MongoDB y obtener los datos
         mongoClient = MongoClients.create("mongodb://localhost:27017");
         MongoDatabase database = mongoClient.getDatabase("celltechhub");
@@ -73,6 +74,7 @@ public class Tabla {
 
         // Asignar el modelo a table1
         table1.setModel(model);
+        table1.setRowHeight(50);
 
         añadirButton.addActionListener(new ActionListener() {
             @Override
@@ -81,9 +83,9 @@ public class Tabla {
                 frame.setContentPane(new Crear().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
-                frame.setResizable(true); // Permitir redimensionar la ventana
+                frame.setResizable(false);
                 frame.setLocationRelativeTo(null);
-                frame.setSize(800, 600);
+                frame.setSize(1000, 630);
                 frame.setVisible(true);
                 ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
             }
@@ -123,14 +125,43 @@ public class Tabla {
                     frame.setContentPane(new Crear(selectedDocument).mainPanel);
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     frame.pack();
-                    frame.setResizable(true); // Permitir redimensionar la ventana
+                    frame.setResizable(false);
                     frame.setLocationRelativeTo(null);
-                    frame.setSize(800, 600);
+                    frame.setSize(1000, 630);
                     frame.setVisible(true);
                     ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
                 } else {
                     JOptionPane.showMessageDialog(mainPanel, "Seleccione una fila para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+        regresarB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("");
+                frame.setContentPane(new Administrador().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+            }
+        });
+        cerrarCesionB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Cell Tech Hub");
+                frame.setContentPane(new Login().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+
             }
         });
     }

@@ -14,7 +14,7 @@ public class Main {
         administrador.insertar(username, password);
 
         JFrame frame = new JFrame("Cell Tech Hub");
-        frame.setContentPane(new Login().mainPanel);
+        frame.setContentPane(new Ventas().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);

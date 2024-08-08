@@ -8,6 +8,8 @@ import org.bson.types.ObjectId;
 import org.bson.conversions.Bson;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -16,8 +18,13 @@ import java.util.List;
 public class Cajero {
 
     private JButton cerrarCesionB;
-    private JPanel mainPanel;
+    public JPanel mainPanel;
     private JTable table1;
+    private JButton fotoButton;
+    private JButton nombreButton;
+    private JButton descriButton;
+    private JButton precioButton;
+    private JButton cantidadButton;
     private DefaultTableModel model;
     private MongoClient mongoClient;
     private MongoDatabase database;
@@ -66,6 +73,7 @@ public class Cajero {
 
         // Assign the model to the table
         table1.setModel(model);
+        table1.setRowHeight(70);
 
         // Add mouse listener for row click
         table1.addMouseListener(new MouseAdapter() {
@@ -73,11 +81,11 @@ public class Cajero {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1 && table1.getSelectedRow() != -1) {
                     int selectedRow = table1.getSelectedRow();
-                    String productId = table1.getValueAt(selectedRow, 0).toString(); // Assuming the product ID is in the first column
-                    String productName = table1.getValueAt(selectedRow, 1).toString(); // Assuming the product name is in the second column
-                    double productPrice = Double.parseDouble(table1.getValueAt(selectedRow, 3).toString()); // Assuming the price is in the fourth column
+                    String productId = table1.getValueAt(selectedRow, 0).toString();
+                    String productName = table1.getValueAt(selectedRow, 1).toString();
+                    double productPrice = Double.parseDouble(table1.getValueAt(selectedRow, 3).toString());
 
-                    // Prompt for quantity
+
                     String quantityString = JOptionPane.showInputDialog(mainPanel, "Ingrese la cantidad para " + productName + ":");
                     if (quantityString != null && !quantityString.isEmpty()) {
                         try {
@@ -86,11 +94,28 @@ public class Cajero {
                             // Update the database and navigate to the purchase screen
                             updateProductQuantity(productId, quantity);
                             showPurchaseScreen(productName, quantity, totalPrice);
+                            ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(mainPanel, "Por favor, ingrese un número válido.");
                         }
                     }
                 }
+            }
+        });
+        cerrarCesionB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Cell Tech Hub");
+                frame.setContentPane(new Login().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+
+
             }
         });
     }

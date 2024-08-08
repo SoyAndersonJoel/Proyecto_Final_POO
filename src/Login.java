@@ -35,7 +35,7 @@ public class Login {
 
                     if (adminUser != null) {
                         if (adminUser.getString("username").equals("Anderson") && adminUser.getString("password").equals("123456")) {
-                            JFrame frame = new JFrame("Cell Tech Hub");
+                            JFrame frame = new JFrame("Administrador");
                             frame.setContentPane(new Administrador().mainPanel);
                             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             frame.pack();
@@ -46,15 +46,15 @@ public class Login {
                             ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
 
                         }else {
-//                            JFrame frame = new JFrame("Cell Tech Hub");
-//                            frame.setContentPane(new Cajero().mainPanel);
-//                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                            frame.pack();
-//                            frame.setResizable(false);
-//                            frame.setLocationRelativeTo(null);
-//                            frame.setSize(1000, 630);
-//                            frame.setVisible(true);
-//                            ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+                            JFrame frame = new JFrame("Cajero");
+                            frame.setContentPane(new Cajero().mainPanel);
+                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            frame.pack();
+                            frame.setResizable(false);
+                            frame.setLocationRelativeTo(null);
+                            frame.setSize(1000, 630);
+                            frame.setVisible(true);
+                            ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
                         }
                     } else {
                             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");

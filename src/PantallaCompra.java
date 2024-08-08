@@ -32,7 +32,7 @@ public class PantallaCompra {
         database = mongoClient.getDatabase("celltechhub");
         collection = database.getCollection("Compras");
 
-        // Ensure the mainPanel is initialized
+
         mainPanel = new JPanel();
         detalleCompraArea = new JTextArea(10, 30);
         confirmarCompraB = new JButton("Confirmar Compra");
@@ -48,10 +48,10 @@ public class PantallaCompra {
         mainPanel.add(new JLabel("Dirección:"));
         mainPanel.add(direccionTf);
         mainPanel.add(confirmarCompraB);
-        mainPanel.add(cancelarCompraB);
+
 
         confirmarCompraB.addActionListener(e -> confirmarCompra());
-        cancelarCompraB.addActionListener(e -> cancelarCompra());
+
 
         // Set the initial detail of the purchase
         setDetalleCompra("Producto: " + productName + "\nCantidad: " + quantity + "\nPrecio Total: $" + totalPrice);
@@ -69,7 +69,7 @@ public class PantallaCompra {
             return;
         }
 
-        // Create a document to insert into the MongoDB collection
+
         Document compra = new Document("productName", productName)
                 .append("quantity", quantity)
                 .append("totalPrice", totalPrice)
@@ -81,13 +81,28 @@ public class PantallaCompra {
 
         JOptionPane.showMessageDialog(mainPanel, "Compra confirmada para: " + nombreComprador);
         // Close the purchase screen window
+        JFrame frame = new JFrame("CRUD Productos");
+        frame.setContentPane(new Cajero().mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setSize(1000, 630);
+        frame.setVisible(true);
         SwingUtilities.getWindowAncestor(mainPanel).dispose();
     }
 
     private void cancelarCompra() {
         // Implementar lógica de cancelación de compra
         JOptionPane.showMessageDialog(mainPanel, "Compra cancelada");
-        // Close the purchase screen window
+        JFrame frame = new JFrame("");
+        frame.setContentPane(new Cajero().mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setSize(1000, 630);
+        frame.setVisible(true);
         SwingUtilities.getWindowAncestor(mainPanel).dispose();
     }
 }

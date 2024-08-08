@@ -31,6 +31,32 @@ public class Crear {
     public Crear() {
         initComponents();
         setupCreateMode();
+        cerrarCesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Cell Tech Hub");
+                frame.setContentPane(new Login().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+            }
+        });
+        cancelarB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                idTf.setText("");
+                cantidadTf.setValue(0);
+                precioTf.setText("");
+                nombreTf.setText("");
+                descripcionTf.setText("");
+                imagenTf.setText("");
+                imagenRuta = "";
+            }
+        });
     }
 
     // Constructor para modo actualización
@@ -65,7 +91,7 @@ public class Crear {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Cell Tech Hub");
-                frame.setContentPane(new Tabla().mainPanel);
+                frame.setContentPane(new GestionProductos().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setResizable(false);
@@ -107,7 +133,7 @@ public class Crear {
                     }
 
                     JFrame frame = new JFrame("Cell Tech Hub");
-                    frame.setContentPane(new Tabla().mainPanel);
+                    frame.setContentPane(new GestionProductos().mainPanel);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.pack();
                     frame.setResizable(false);

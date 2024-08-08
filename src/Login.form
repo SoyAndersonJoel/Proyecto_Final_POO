@@ -115,7 +115,7 @@
               <borderPainted value="false"/>
               <font name="Berlin Sans FB Demi" size="14" style="1"/>
               <foreground color="-526345"/>
-              <text value="Eliminar"/>
+              <text value="Cancelar"/>
             </properties>
           </component>
           <component id="284f" class="javax.swing.JTextField" binding="usuarioTF">

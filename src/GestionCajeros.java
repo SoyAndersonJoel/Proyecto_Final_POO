@@ -19,6 +19,10 @@ public class GestionCajeros {
     private JButton actualizarButton;
     private JButton eliminarButton;
     private JButton añadirButton;
+    private JButton regresarButton;
+    private JButton idButton;
+    private JButton usuarioButton;
+    private JButton contrseñaButton;
 
     private MongoClient mongoClient;
     private MongoCollection<Document> collection;
@@ -99,13 +103,27 @@ public class GestionCajeros {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Regresar a la vista principal
-                JFrame frame = new JFrame("Login");
-                frame.setContentPane(new Login().mainPanel); // Asegúrate de tener una clase Login
+                JFrame frame = new JFrame("");
+                frame.setContentPane(new Login().mainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setResizable(false);
                 frame.setLocationRelativeTo(null);
-                frame.setSize(300, 200);
+                frame.setSize(1000, 630);
+                frame.setVisible(true);
+                ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+            }
+        });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("");
+                frame.setContentPane(new Administrador().mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setSize(1000, 630);
                 frame.setVisible(true);
                 ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
             }
