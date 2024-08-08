@@ -46,15 +46,15 @@ public class Login {
                             ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
 
                         }else {
-                            JFrame frame = new JFrame("Cell Tech Hub");
-                            frame.setContentPane(new Login().mainPanel);
-                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            frame.pack();
-                            frame.setResizable(false);
-                            frame.setLocationRelativeTo(null);
-                            frame.setSize(1000, 630);
-                            frame.setVisible(true);
-                            ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
+//                            JFrame frame = new JFrame("Cell Tech Hub");
+//                            frame.setContentPane(new Cajero().mainPanel);
+//                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                            frame.pack();
+//                            frame.setResizable(false);
+//                            frame.setLocationRelativeTo(null);
+//                            frame.setSize(1000, 630);
+//                            frame.setVisible(true);
+//                            ((JFrame) SwingUtilities.getWindowAncestor(mainPanel)).dispose();
                         }
                     } else {
                             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
